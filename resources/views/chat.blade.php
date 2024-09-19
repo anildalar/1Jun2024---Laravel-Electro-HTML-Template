@@ -11,7 +11,6 @@
                 </span>
             </div>
             <div class="card-body" style="min-height:350px;">
-                
                 @foreach ($chatDatas as $chatData)
                     @if($chatData['sender']=='customercare')
                     <span class="clearfix">

@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class MessageSent
 {
     //1. Property
+    public $message;
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -21,7 +22,7 @@ class MessageSent
     //2. Constructor
     public function __construct()
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -36,5 +37,10 @@ class MessageSent
         return [
             new PrivateChannel('chat_channel'),
         ];
+    }
+
+    public function broadcastAs()
+    {
+        return 'message.sent';
     }
 }

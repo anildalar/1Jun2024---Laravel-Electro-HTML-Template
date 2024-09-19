@@ -245,5 +245,9 @@
         editor1cfg.toolbar = "basic";
         var editor1 = new RichTextEditor("#product_desc", editor1cfg);
     </script>
+    <script type="module" src="/js/app.js"></script>
+     <script>
+        alert('CustomerCare Footer');
+    </script>
 </body>
 </html>

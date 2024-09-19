@@ -1,23 +1,38 @@
+// socket-server.js
+import { createServer } from 'http';
 import { Server } from 'socket.io';
+//import Redis from 'ioredis';
 
-// Initialize Socket.io server on port 3000
-const io = new Server(3000);
+// Create a new Redis instance and subscribe to the chat channel
+//const redis = new Redis();
+const httpServer = createServer();
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
-// Print that the socket server is running
-console.log('Socket server is running on port 3000 Anil');
+// Listen for Redis events
+/* redis.subscribe('chat_channel', (err, count) => {
+    console.log('Subscribed to chat-channel');
+}); */
 
-//on = listen
+/* redis.on('message', (channel, message) => {
+    message = JSON.parse(message);
+    io.emit(channel + ':' + message.event, message.data);
+});
+ */
+// Listen for new connections
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    //on = listen = recieve
-    socket.on('chat:message', (message) => {
-        // emit = speak = send
-        //We are sending some informattion
-        io.emit('chat:message', message);
-    });
-
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log('User disconnected...');
     });
+});
+
+// Start the server on port 3000
+httpServer.listen(3000, () => {
+    console.log('Socket server is running on port 3000');
 });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 
+use App\Events\MessageSent;
+
 class ChatController extends Controller
 {
     /**
@@ -83,7 +85,10 @@ class ChatController extends Controller
         return view('customercare.cc_chat'); //cc_chat.blade.php
     }
 
-    public function send(Request $request){
-        dd($request->all());
+    public function sendMessage(Request $request){
+         // Broadcast the message to the 'chat' channel
+         broadcast(new MessageSent($request->message));
+
+         return response()->json(['status' => 'Message Sent!']);
     }
 }

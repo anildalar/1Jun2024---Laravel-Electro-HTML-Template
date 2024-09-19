@@ -2,11 +2,13 @@ import axios from 'axios';
 import Echo from 'laravel-echo';
 import io from 'socket.io-client';
 
+// Configure Laravel Echo to use Socket.io
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: window.location.hostname + ':3000',
-    client: io
+    host: window.location.hostname + ':3000', // Adjust port if necessary
+    client: io,
 });
+
 
 window.axios = axios;
 

@@ -45,7 +45,7 @@
                 font-size:1.5em;
             }
         </style>
-        <script src="{{ mix('js/app.js') }}"></script>
+        
     </head>
     <body>
 
@@ -297,17 +297,9 @@
                     //console.log('Hello',e.target.value);
                 });
         </script>
+        <script type="module" src="/js/app.js"></script>
         <script>
-            document.getElementById('send').addEventListener('click', () => {
-                let message = document.getElementById('message').value;
-                axios.post('/send', { message });
-            });
-
-            Echo.channel('chat_chanel')
-                .listen('MessageSent', (e) => {
-                    let messages = document.getElementById('messages');
-                    messages.innerHTML += '<p>' + e.message + '</p>';
-                });
+            alert('Customer Footer');
         </script>
     </body>
 </html>
